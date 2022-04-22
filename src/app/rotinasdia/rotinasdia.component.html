@@ -1,0 +1,15 @@
+<header>
+  <h1>Rotinas Dia!</h1>
+</header>
+
+<label> Dia: <input type="date" [formControl]="dia" /> </label>
+
+<ng-container *ngIf="consultaRotinasDia$ | async as consultaRotinasDia">
+  <app-rotinadia
+    *ngFor="let rotinaDia of consultaRotinasDia; index as i"
+    [rotinaDia]="rotinaDia"
+    [impar]="i % 2 === 1"
+  ></app-rotinadia>
+</ng-container>
+
+<main>Retornou um dia!</main>

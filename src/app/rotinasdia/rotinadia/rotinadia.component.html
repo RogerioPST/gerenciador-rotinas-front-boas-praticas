@@ -1,0 +1,46 @@
+<div [class.impar]="impar">
+  <h2>{{ rotinaDia.rotina.descricao }}</h2>
+  <div>
+    <input [value]="rotinaDia.usuarioInicioRotina?.matricula" />
+    <input
+      #inicio
+      type="checkbox"
+      [checked]="rotinaDia.horaInicio !== null"
+      (change)="salvar('inicio')"
+    />
+  </div>
+
+  <div>
+    <input [value]="rotinaDia.usuarioFimRotina?.matricula" />
+    <input
+      #fim
+      type="checkbox"
+      [disabled]="!inicio.checked"
+      (change)="salvar('fim')"
+    />
+  </div>
+
+  <button
+		[class.nao-iniciado]="rotinaDia.status.nome === 'NÃO INICIADO'"
+		[class.em-andamento]="rotinaDia.status.nome === 'EM ANDAMENTO'"
+		[class.finalizado]="rotinaDia.status.nome === 'FINALIZADO'"
+	>
+		{{ rotinaDia.status.nome }}
+	</button>
+</div>
+
+<!-- coloquei pq n está pegando a classe do button rs -->
+
+<label class="switch">
+  <div class="switch-wrapper">
+    <input type="checkbox" name="watch" />
+    <!-- <div *ngIf="rotinadia.horaFim">
+			{{rotinadia.horaFim}}
+		</div> -->
+    <span class="switch-button"></span>
+  </div>
+</label>
+
+
+
+<button (click)="finalizar()">FINALIZAR</button>

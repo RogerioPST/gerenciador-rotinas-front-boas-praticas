@@ -1,0 +1,223 @@
+.impar {
+  background-color: red;
+  display: flex;
+  flex-direction: column;
+}
+
+html {
+  /* c font-size a 100%, 1rem = 16px;  */
+  /* c font size de 62.5%, corresponde a 1rem= 10px (regra de tres) - basta dividir os pixels por 10 */
+  font-size: 62.5%;
+  --tamanho-menu-max: 38rem;
+  --tamanho-input-max: 35rem;
+  --tamanho-menu-min: 10rem;
+  --tamanho-input-min: 10rem;
+
+  --cor-gelo: #ffffff;
+  --cor-padrao: black;
+  --cor-padrao-alfa: rgba(0, 0, 0, 0.5);
+  --cor-alerta: red;
+  --cor-checked: rgb(0, 114, 220);
+  --cor-cabecalho-tabela: rgb(62, 113, 198);
+  --cor-borda-input: rgba(157, 169, 187);
+  --cor-tabela-par: rgb(206, 213, 233);
+  --cor-tabela-impar: rgb(231, 234, 243);
+  --cor-st-andamento: rgb(255, 185, 0);
+  --cor-st-finalizado: green;
+
+  margin: 1rem;
+}
+
+/* font-size: 62.5%  - corresponde a 1rem= 10px (regra de tres) - basta dividir os pixels por 10*/
+/* p usar a variavel  */
+/* background: var(--preto); */
+/* abaixo: o menor tamanho q vai ficar, o padrao e o tam max q vai ficar
+		font-size: clamp(1.4rem, 1.6rem, 2vw) - p facilitar a responsividade 
+		p acessibilidade, usar a classe do tailwind sr-only (screen only) 
+		width: min(36rem, 100%)
+		normalmente, no button, deixar line-height:0; p n desalinhar as coisas..
+		aplicar display flex no button p alinhar tb
+		no hover do botao, aplicar filter: brightness(1.2) c transition: filter 2s (aplicado na tag button sem hover)
+		background-position-x: -10rem;
+		qdo criar uma class="ball top" e class="ball bottom" no html, usar no css assim:
+		
+		.ball.top{
+		}
+		.ball.bottom{
+		}
+p dar estilo p o placeholder
+	input::placeholder{
+		color: black;
+	}
+		
+		*/
+
+* {
+  box-sizing: border-box;
+}
+
+/*
+https://css-tricks.com/complete-guide-table-element/ 
+*/
+table {
+  width: 70%;
+  text-align: right;
+  border-collapse: collapse;
+  margin: 1rem 0px;
+}
+table,
+th,
+td {
+  border: 0;
+}
+thead {
+  background-color: rgb(62, 113, 198);
+}
+thead tr {
+  color: #ffffff;
+}
+th,
+td {
+  padding: 0.25rem;
+  text-align: left;
+  border: 1px solid #ffffff;
+}
+
+tr {
+  color: black;
+}
+
+button {
+  width: 9rem;
+  color: #ffffff;
+  padding: 0.4rem;
+  border: 0;
+}
+
+td button {
+  color: #ffffff;
+  padding: 0.2rem 0.4rem;
+  width: 9rem;
+  margin: 0 0.4rem;
+}
+
+button.finalizado,
+button {
+  background-color: green;
+}
+button.em-andamento {
+  background-color: rgb(255, 185, 0);
+}
+button.nao-iniciado {
+  background-color: red;
+}
+
+tbody tr:nth-child(odd) {
+  background: rgb(206, 213, 233);
+}
+tbody tr:nth-child(even) {
+  background: rgb(231, 234, 243);
+}
+/* 
+td:hover { 
+  background: rgba(207, 174, 113, 0.8);
+}
+tbody tr:hover {
+  background: rgba(207, 174, 113, 0.8);
+}
+ */
+input {
+  outline: none;
+  /* background: transparent;   */
+  border: 1px solid rgba(157, 169, 187);
+  border-radius: 5px;
+}
+
+input[type="text"] {
+  width: 6rem;
+}
+input::placeholder {
+  font-weight: bold;
+  font-size: 1.5rem;
+  background-color: #ffffff;
+}
+
+main {
+  /* top: 200px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+tbody td div {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.alerta {
+  width: 70vw;
+  height: 25px;
+  background-color: rgb(62, 113, 198);
+  color: #ffffff;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+/* css checkbox */
+.switch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.switch .switch-text {
+  padding-right: 0.3rem;
+  font-size: 1.2rem;
+}
+
+.switch .switch-wrapper {
+  display: inline-block;
+  width: 15px;
+  height: 8px;
+  position: relative;
+}
+.switch .switch-wrapper .switch-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 40px;
+  background-color: red;
+}
+
+.switch .switch-wrapper input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch .switch-wrapper .switch-button::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  position: absolute;
+  left: 1px;
+  bottom: 1px;
+  border-radius: 50%;
+  transition: 0.4s all ease;
+  background-color: #ffffff;
+}
+.switch .switch-wrapper input:checked + .switch-button {
+  background-color: rgb(0, 114, 220);
+}
+.switch .switch-wrapper input:checked + .switch-button::before {
+  transform: translateX(6px);
+}

@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "front-gerenciador-rotinas"
+    }
+  },
+  "defaultProject": "front-gerenciador-rotinas",
+  "cli": {
+    "analytics": "300f0a53-2335-43ab-9a40-70597e15e6a7"
+  }
 }

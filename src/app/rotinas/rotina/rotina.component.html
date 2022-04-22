@@ -1,0 +1,7 @@
+<div>
+  {{ rotina.id }}
+  <input [formControl]="descricao">
+
+  <button [disabled]="descricao.invalid" (click)="alterar()">Alterar descrição</button>
+  <button (click)="apagar()">Apagar</button>
+</div>

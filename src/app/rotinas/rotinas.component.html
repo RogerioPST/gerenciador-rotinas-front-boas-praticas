@@ -1,0 +1,22 @@
+<!-- Usuario Logado:
+<p *ngIf="usuarioLogado$ | async as usuarioLogado; else semUsuario">
+  {{ usuarioLogado }}
+</p>
+
+<ng-template #semUsuario> Nenhum usuário logado </ng-template> -->
+
+<section>
+  <h2>Criar nova rotina</h2>
+  <form [formGroup]="novaRotina" (submit)="criarNovaRotina()">
+    <label>
+      Descrição: <input type="text" formControlName="descricao">
+    </label>
+
+    <button type="submit" [disabled]="novaRotina.invalid">Criar</button>
+  </form>
+</section>
+
+<section *ngIf="rotinas">
+  <h2>Rotinas existentes</h2>
+	<app-rotina *ngFor="let rotina of rotinas" [rotina]="rotina" (atualizar)="getList()"></app-rotina>
+</section>
