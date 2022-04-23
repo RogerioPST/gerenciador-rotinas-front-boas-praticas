@@ -1,7 +1,10 @@
 <nav>
   <!-- <button [routerLink]="['/rotinasdia', '2022-03-11']">Rotinas Dia</button> -->
-  <button [routerLink]="['/rotinasdia']">Rotinas Dia</button>
-  <button [routerLink]="['/rotinas']">Rotinas</button>
-  <button [routerLink]="['/usuarios']">Usuários</button>
+  <button [routerLink]="['/']">Home</button>
+  <ng-container *ngIf="usuarioLogado$ | async">
+    <button [routerLink]="['/rotinasdia']">Rotinas Dia</button>
+    <button [routerLink]="['/rotinas']">Rotinas</button>
+    <button [routerLink]="['/usuarios']">Usuários</button>
+  </ng-container>
   <app-login></app-login>
 </nav>

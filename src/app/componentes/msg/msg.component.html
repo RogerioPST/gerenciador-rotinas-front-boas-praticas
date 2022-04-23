@@ -1,0 +1,5 @@
+<div *ngIf="mensagem" class="mensagem {{ tipo }}">
+  <h6>{{ tipo | titlecase }}</h6>
+  <p>{{ mensagem }}</p>
+  <button (click)="fechar()">Fechar</button>
+</div>

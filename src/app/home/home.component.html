@@ -1,0 +1,17 @@
+<hr />
+<form [formGroup]="form" (submit)="definirMensagem()">
+  <label> Mensagem: <input formControlName="mensagem" /> </label>
+
+  <label>
+    Tipo:
+    <select formControlName="tipo">
+      <option value="info">info</option>
+      <option value="alerta">alerta</option>
+      <option value="erro">erro</option>
+      <option value="sucesso">sucesso</option>
+    </select>
+  </label>
+
+  <button type="submit" [disabled]="form.invalid">Definir Mensagem</button>
+  <button type="button" (click)="reset()">Reset</button>
+</form>

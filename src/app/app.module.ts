@@ -12,9 +12,12 @@ import { RotinasComponent } from './rotinas/rotinas.component';
 import { LoginComponent } from './navbar/login/login.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { RotinaComponent } from './rotinas/rotina/rotina.component';
+import { HomeComponent } from './home/home.component';
+import { MensagemComponent } from './componentes/mensagem/mensagem.component';
+import { MsgComponent } from './componentes/msg/msg.component';
 
 @NgModule({
-  declarations: [AppComponent, RotinasdiaComponent, RotinadiaComponent, NavbarComponent, RotinasComponent, LoginComponent, UsuariosComponent, RotinaComponent],
+  declarations: [AppComponent, RotinasdiaComponent, RotinadiaComponent, NavbarComponent, RotinasComponent, LoginComponent, UsuariosComponent, RotinaComponent, HomeComponent, MensagemComponent, MsgComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
