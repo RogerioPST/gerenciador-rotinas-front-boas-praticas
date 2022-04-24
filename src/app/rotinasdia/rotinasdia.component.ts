@@ -29,9 +29,6 @@ export class RotinasdiaComponent implements OnInit {
   }
 
 	private devolveDiaFormatado(): string {
-		const data = new Date();
-		var dia = String(data. getDate()). padStart(2 ,'0');
-		var mes = String(data. getMonth() + 1). padStart(2, '0');
-		return `${data.getFullYear()}-${mes}-${dia}`;
-	}
+		return this.service.devolveDiaFormatado();
+	}			
 }

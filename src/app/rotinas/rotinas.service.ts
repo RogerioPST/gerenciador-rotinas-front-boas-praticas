@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { delay, first, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, delay, first, tap } from 'rxjs/operators';
 import { Rotina } from '../app.model';
+import { MensagemService } from '../componentes/mensagem/mensagem.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ import { Rotina } from '../app.model';
 export class RotinasService {
   private readonly API = 'api/rotinas';
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private mensagemService: MensagemService) {}
 
   list(): Observable<Rotina[]> {
     return this.httpClient.get<Rotina[]>(this.API);
@@ -31,4 +32,17 @@ export class RotinasService {
   delete(id: number): Observable<Rotina> {
     return this.httpClient.delete<Rotina>(`${this.API}/${id}`);
   }
+/*   delete(id: number): Observable<Rotina> {
+    return this.httpClient.delete<Rotina>(`${this.API}/${id}`)
+		.pipe(
+			catchError( error =>	{			
+				this.mensagemService.setMensagem({
+					mensagem: `Não foi possível apagar! ${error}`,
+					tipo: 'erro',
+				});
+				
+			}
+				
+			));
+  } */
 }

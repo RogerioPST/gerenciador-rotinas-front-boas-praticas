@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Rotina } from '../app.model';
+import { MensagemService } from '../componentes/mensagem/mensagem.service';
 import { UsuarioLogadoService } from '../usuario-logado.service';
 import { RotinasService } from './rotinas.service';
 
@@ -20,7 +21,7 @@ export class RotinasComponent implements OnInit {
 
   constructor(
     private usuarioLogadoService: UsuarioLogadoService,
-    private service: RotinasService
+    private service: RotinasService, private mensagemService: MensagemService
   ) {}
 
   ngOnInit(): void {
@@ -32,6 +33,12 @@ export class RotinasComponent implements OnInit {
   }
 
   criarNovaRotina(): void {
-    this.service.create(this.novaRotina.get('descricao').value).subscribe(() => this.getList());
+    this.service.create(this.novaRotina.get('descricao').value).subscribe(() => {
+			this.mensagemService.setMensagem({
+				mensagem: 'Rotina criada com sucesso!',
+				tipo: 'info',
+			});
+			this.getList()}
+			);
   }
 }

@@ -1,7 +1,10 @@
-<div>
-  {{ rotina.id }}
-  <input [formControl]="descricao">
+<div class="form-rotina">
+  <label for="desc" class="rotulo">
+		ID: {{ rotina.id }}
+	</label> 
+		
+  <input [formControl]="descricao" id="desc">
 
-  <button [disabled]="descricao.invalid" (click)="alterar()">Alterar descrição</button>
+  <button [disabled]="descricao.invalid" (click)="alterar()">Alterar</button>
   <button (click)="apagar()">Apagar</button>
 </div>

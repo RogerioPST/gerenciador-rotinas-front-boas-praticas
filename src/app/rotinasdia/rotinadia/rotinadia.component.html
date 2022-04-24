@@ -1,23 +1,41 @@
-<div [class.impar]="impar">
-  <h2>{{ rotinaDia.rotina.descricao }}</h2>
-  <div>
-    <input [value]="rotinaDia.usuarioInicioRotina?.matricula" />
-    <input
-      #inicio
-      type="checkbox"
-      [checked]="rotinaDia.horaInicio !== null"
-      (change)="salvar('inicio')"
-    />
+<section [class.impar]="impar" class="rotinas">
+  <h2>{{ rotinaDia.rotina.descricao | titlecase }}</h2>
+  <div class="ajuste-horizonal">
+    <input disabled
+		[value]="rotinaDia.usuarioInicioRotina?.matricula.concat('-',rotinaDia.horaInicio.substring(0,5))" type="text" />    
+		<label class="switch">
+			<div class="switch-wrapper">
+				<input
+					#inicio
+					type="checkbox"
+					[checked]="rotinaDia.horaInicio !== null"
+					[disabled]="rotinaDia.horaInicio !== null"
+					(change)="salvar('inicio')"
+				/>		
+				<span class="switch-button"></span>
+			</div>
+		</label>
   </div>
+	
+  <div class="ajuste-horizonal">
+		<input disabled
+		[value]="rotinaDia.usuarioFimRotina?.matricula.concat('-',rotinaDia.horaFim.substring(0,5))" type="text" />
+		<label class="switch">
+			<div class="switch-wrapper">
+				<input
+				#fim
+				type="checkbox"
+					[checked]="rotinaDia.horaFim !== null"	
+					[disabled]="!inicio.checked || rotinaDia.horaFim !== null"
+					(change)="salvar('fim')"
+				/>
+		
+				<span class="switch-button"></span>
+			</div>
+		</label>
 
-  <div>
-    <input [value]="rotinaDia.usuarioFimRotina?.matricula" />
-    <input
-      #fim
-      type="checkbox"
-      [disabled]="!inicio.checked"
-      (change)="salvar('fim')"
-    />
+
+    
   </div>
 
   <button
@@ -27,20 +45,19 @@
   >
     {{ rotinaDia.status.nome }}
   </button>
-</div>
+</section>
 
-<!-- coloquei pq n está pegando a classe do button rs -->
+<button class="finalizar" (click)="salvarDia('fim')">FINALIZAR</button>
 
-<label class="switch">
-  <div class="switch-wrapper">
-    <input type="checkbox" name="watch" />
-    <!-- <div *ngIf="rotinadia.horaFim">
-			{{rotinadia.horaFim}}
-		</div> -->
-    <span class="switch-button"></span>
-  </div>
-</label>
+<!-- <app-msg *ngIf="mensagem" [mensagem]="mensagem"></app-msg> -->
 
-<button (click)="finalizar()">FINALIZAR</button>
+<!-- 
 
-<app-msg *ngIf="mensagem" [mensagem]="mensagem"></app-msg>
+1. qdo atualiza fecha e abre a tela do navegador, deveria deslogar...
+2. o botao de finalizar deveria aparecer somente uma vez e eh no outro componente, mas ainda n consegui.
+3. tentei inserir table e tr p ficar no padrao q eu tinha criado, mas n deu certo..
+4. tentei finalizar/salvarDia o dia no outro componente, mas n consegui por enquanto... apenas nesse 
+5. precisa exibir uma msg de q o dia está finalizado qdo o dia estiver finalizado
+6. qdo muda a data e dah refresh, volta p o dia de hoje e n deveria..
+
+ -->

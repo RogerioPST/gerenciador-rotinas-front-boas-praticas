@@ -1,4 +1,4 @@
-.mensagem {
+.mensagem-leandro {
   position: fixed;
   bottom: 32px;
   right: 32px;
@@ -7,13 +7,29 @@
   color: #ffffff;
 }
 
+
+.mensagem {
+	position: fixed;
+  bottom: 64px;
+  right: 5rem;  
+	padding: 24px;  
+  color: #ffffff;
+  width: 90vw;
+  height: 25px;
+  background-color: rgb(62, 113, 198);    
+  align-items: center;
+  justify-content: center;
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
 h6 {
   font-size: 16px;
   font-weight: bold;
 }
 
 p {
-  margin-top: 12px;
+  margin-top: 0px;
   font-size: 16px;
 }
 
