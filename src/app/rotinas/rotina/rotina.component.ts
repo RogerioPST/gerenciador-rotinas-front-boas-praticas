@@ -52,12 +52,19 @@ export class RotinaComponent implements OnInit {
 			);
   } */
   apagar():void {
-    this.service.delete(this.rotina.id).subscribe(() => {
-			this.mensagemService.setMensagem({
-				mensagem: 'Rotina apagada com sucesso!',
-				tipo: 'info',
+    this.service.delete(this.rotina.id).subscribe(
+			() => {
+				this.mensagemService.setMensagem({
+					mensagem: 'Rotina apagada com sucesso!',
+					tipo: 'info',
+				});
+				this.atualizar.emit()
+			},
+			(erro) => {
+				this.mensagemService.setMensagem({
+					mensagem: erro.statusText,
+					tipo: 'erro',
+				});
 			});
-			this.atualizar.emit()
-		});
   }
 }

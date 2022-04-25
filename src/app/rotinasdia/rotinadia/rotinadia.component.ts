@@ -1,5 +1,5 @@
-import { Component, Input, Output } from '@angular/core';
-import { RotinaDia, Usuario, StatusNome, Dia } from 'src/app/app.model';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { RotinaDia, Usuario, StatusNome, Dia, Status } from 'src/app/app.model';
 import { AppService } from 'src/app/app.service';
 import { MensagemService } from 'src/app/componentes/mensagem/mensagem.service';
 
@@ -10,16 +10,14 @@ import { MensagemService } from 'src/app/componentes/mensagem/mensagem.service';
 })
 export class RotinadiaComponent {
   @Input() rotinaDia: RotinaDia;
-  @Input() impar: boolean;  
-
-	
+  @Input() impar: boolean;
+  @Output() status = new EventEmitter<Status>();
   mensagem: string = null;
 
   constructor(
     private service: AppService,
     private mensagemService: MensagemService
-  ) {		
-	}
+  ) {}
 
   salvar(momento: string): void {
     this.service
@@ -46,60 +44,16 @@ export class RotinadiaComponent {
         momento === 'inicio' ? 'EM ANDAMENTO' : 'FINALIZADO'
       )
       .subscribe((rotinaDia) => {
-        console.log('>>', rotinaDia);
-        this.rotinaDia = rotinaDia;        
+        this.rotinaDia = rotinaDia;
+        this.status.emit(rotinaDia.status);
       });
   }
 
   private devolveHoraFormatada(): string {
-		return this.service.devolveHoraFormatada();
+    return this.service.devolveHoraFormatada();
   }
 
   private devolveUsuarioLogado(): Usuario {
-		return this.service.devolveUsuarioLogado();
-    
+    return this.service.devolveUsuarioLogado();
   }
-
-  salvarDia(momento: string) {	
-		this.service
-      .salvarDia(
-        {
-          ...this.rotinaDia.dia,
-          horaAbertura:
-            momento === 'inicio'
-              ? this.devolveHoraFormatada()
-              : this.rotinaDia.dia.horaAbertura,
-          horaFechamento:
-            momento === 'fim'
-              ? this.devolveHoraFormatada()
-              : this.rotinaDia.dia.horaFechamento,
-					usuarioAbertura:
-            momento === 'inicio'
-              ? this.devolveUsuarioLogado()
-              : this.rotinaDia.dia.usuarioAbertura,
-					usuarioFechamento:
-            momento === 'fim'
-              ? this.devolveUsuarioLogado()
-              : this.rotinaDia.dia.usuarioFechamento,
-        },
-        momento === 'inicio' ? 'EM ANDAMENTO' : 'FINALIZADO'
-      )
-      .subscribe((dia) => {
-        console.log('>>dia', dia);
-        this.rotinaDia.dia = dia;
-				/* this.mensagem = 'mensagem Dia finalizado'; */
-				this.mensagemService.setMensagem({
-					mensagem: 'Dia finalizado!',
-					tipo: 'sucesso',
-				});
-      });
-
-
-    /* console.log(this.rotinaDia.dia);
-    this.mensagem = 'Bla bla bla';
-    this.mensagemService.setMensagem({
-      mensagem: 'Blo blo blo',
-      tipo: 'info',
-    }); */
-  }	
 }

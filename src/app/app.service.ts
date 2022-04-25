@@ -31,11 +31,12 @@ export class AppService {
 
   salvarDia(dia: Dia, status: string): Observable<Dia> {
     return this.buscarStatus(status).pipe(
-      switchMap((retornoStatus: Status) =>
-        this.httpClient.put<Dia>(`${this.API_DIA}/${dia.id}`, {
+      switchMap((retornoStatus: Status) => {
+        return this.httpClient.put<Dia>(`${this.API_DIA}/${dia.id}`, {
           ...dia,
           status: retornoStatus,
-        })
+        });
+      }
       )
     );
   }

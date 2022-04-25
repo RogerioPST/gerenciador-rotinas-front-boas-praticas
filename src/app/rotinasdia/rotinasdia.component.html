@@ -2,20 +2,23 @@
   <h1>Rotinas Dia!</h1>
 </header>
 
-<label class="rotulo"> Dia: <input type="date" [formControl]="dia" /> </label>
+<label class="rotulo"> Dia: <input type="date" [formControl]="formDia" /> </label>
 
-<ng-container *ngIf="consultaRotinasDia$ | async as consultaRotinasDia">	
-  <app-rotinadia		
+<ng-container *ngIf="consultaRotinasDia$ | async as consultaRotinasDia">
+  <div class="cabecalho">
+		<span>Rotina</span>
+		<span>Inicio</span>
+		<span>Fim</span>
+		<span>Status</span>
+	</div>
+
+  <app-rotinadia
     *ngFor="let rotinaDia of consultaRotinasDia; index as i"
-    [rotinaDia]="rotinaDia"		
+    [rotinaDia]="rotinaDia"
     [impar]="i % 2 === 1"
+    (status)="atualizaStatus($event, i, consultaRotinasDia[0].dia)"
   ></app-rotinadia>
+{{consultaRotinasDia[0].dia.status.nome}}
+  <button type="button" class="finalizar" (click)="salvarDia(consultaRotinasDia[0].dia, 'FINALIZADO')" [disabled]="!podeFinalizarDia">FINALIZAR</button>
 </ng-container>
-
-
-
-
-<main>
-	 Retornou um dia!</main>
-
 
