@@ -47,9 +47,9 @@ export class AppService {
 
 	devolveUsuarioLogado(): Usuario{
 		return {
-      id: 7,
-      nome: 'Cestari',
-      matricula: 'c11111',
+      id: 6,
+      nome: 'Roger',
+      matricula: 'c007007',
       tipo: 'ADM',
     };
 	}

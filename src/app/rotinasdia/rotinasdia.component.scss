@@ -16,5 +16,10 @@ button:disabled {
 	display: grid;
 	grid-template-columns: 3fr 1fr 1fr 1fr;
 	align-items:center;
+	color: #FFF;
+	font-weight: bold;
+	font-size: 2rem;
+	background-color: rgb(62, 113, 198);
+	
 }
 
